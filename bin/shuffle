@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+$autoloadLocations = array(
+    getcwd() . '/vendor/autoload.php',
+    getcwd() . '/../../autoload.php',
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php',
+);
+
+foreach ($autoloadLocations as $autoload) {
+    if (is_file($autoload)) {
+        require_once($autoload);
+        break;
+    }
+}
+
+$objGame = new \Freecell\Game();
+$objGame->run(500832);
+echo $objGame;

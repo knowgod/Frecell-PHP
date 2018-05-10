@@ -63,10 +63,10 @@ class Game implements Api\GameObjectInterface
     {
         $cardsLeftToPlace = static::CARD_COUNT;
 
-        $rand = msvcrt_rand($gamenumber);            // $gamenumber is seed for rand()
+        $randFunction = \Freecell\Lib\PRNG\LinearCongruentialGenerator::msvcrt_rand($gamenumber);            // $gamenumber is seed for rand()
 
         for ($i = 0; $i < static::CARD_COUNT; $i++) {
-            $j = $rand() % $cardsLeftToPlace;
+            $j = $randFunction() % $cardsLeftToPlace;
 
             $this->columns[ ($i % 8) + 1 ][ $i / 8 ] = $this->deck->getCard($j);
 

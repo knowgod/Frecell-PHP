@@ -1,0 +1,21 @@
+{
+  "name": "arkadij/logika",
+  "description": "Freecell solitaire game",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "authors": [
+    {
+      "name": "Arkadij Kuzhel",
+      "email": "arkuzhel@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Freecell\\": "src/",
+      "Freecell\\Lib\\": "lib/"
+    }
+  },
+  "minimum-stability": "beta"
+}
