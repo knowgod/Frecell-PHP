@@ -1,10 +1,8 @@
 {
-  "name": "arkadij/logika",
+  "name": "knowgod/freecell-php",
   "description": "Freecell solitaire game",
   "license": "MIT",
-  "require": {
-    "php": ">=7.0.0"
-  },
+  "version": "0.1.0",
   "authors": [
     {
       "name": "Arkadij Kuzhel",
@@ -17,5 +15,18 @@
       "Freecell\\Lib\\": "lib/"
     }
   },
-  "minimum-stability": "beta"
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.0.0",
+    "knowgod/prng": "~0.1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.2.0"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/knowgod/PseudoRandomNumberGenerator"
+    }
+  ]
 }

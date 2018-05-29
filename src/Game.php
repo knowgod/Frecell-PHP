@@ -63,7 +63,7 @@ class Game implements Api\GameObjectInterface
     {
         $cardsLeftToPlace = static::CARD_COUNT;
 
-        $randFunction = \Freecell\Lib\PRNG\LinearCongruentialGenerator::msvcrt_rand($gamenumber);            // $gamenumber is seed for rand()
+        $randFunction = \Knowgod\PRNG\LinearCongruentialGenerator::msvcrt_rand($gamenumber);            // $gamenumber is seed for rand()
 
         for ($i = 0; $i < static::CARD_COUNT; $i++) {
             $j = $randFunction() % $cardsLeftToPlace;
