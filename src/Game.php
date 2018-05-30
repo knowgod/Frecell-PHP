@@ -6,6 +6,9 @@
 
 namespace Freecell;
 
+use Freecell\Deck\Column;
+use Freecell\Deck\ColumnFactory;
+
 /**
  * Class Game
  *
@@ -39,12 +42,23 @@ class Game implements Api\GameObjectInterface
     protected $cardFactory;
 
     /**
+     * @var ColumnFactory
+     */
+    protected $columnFactory;
+
+    /**
+     * @var Column[]
+     */
+    protected $columnObjects;
+
+    /**
      * Game constructor.
      */
     public function __construct()
     {
-        $this->cardFactory = new CardFactory();
-        $this->deck        = new Deck();
+        $this->deck          = new Deck();
+        $this->cardFactory   = new CardFactory();
+        $this->columnFactory = new ColumnFactory();
 
         $this->clearDesk();
     }
@@ -54,8 +68,7 @@ class Game implements Api\GameObjectInterface
      */
     public function run(int $gameNumber = 500800)
     {
-        $this->placeCards();
-        $this->shuffle($gameNumber);
+        $this->initialize($gameNumber);
     }
 
     /**
@@ -120,5 +133,30 @@ class Game implements Api\GameObjectInterface
                 $this->rows[ $pos ][ $col ]    = &$this->columns[ $col ][ $pos ];
             }
         }
+    }
+
+    /**
+     * Initialize column objects
+     */
+    protected function initColumns()
+    {
+        foreach ($this->columns as $iColumn => $cardColumn) {
+            $column = $this->columnFactory->createFilled($cardColumn);
+            if (!$column->isEmpty()) {
+                $this->columnObjects[ $iColumn ] = $column;
+            }
+        }
+    }
+
+    /**
+     * Prepare the game according to its unique number
+     *
+     * @param int $gameNumber
+     */
+    protected function initialize(int $gameNumber)
+    {
+        $this->placeCards();
+        $this->shuffle($gameNumber);
+        $this->initColumns();
     }
 }

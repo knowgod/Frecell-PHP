@@ -2,6 +2,8 @@
 
 namespace Freecell;
 
+use Freecell\Api\GameObjectInterface;
+
 /**
  * Class CardRepresentationFactory
  *
@@ -13,7 +15,7 @@ class CardFactory implements Api\FactoryInterface
      *
      * @return Card
      */
-    public function create(int $cardNum = null): Card
+    public function create(int $cardNum = null): GameObjectInterface
     {
         return new Card($cardNum);
     }

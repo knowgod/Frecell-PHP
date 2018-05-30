@@ -139,5 +139,4 @@ class Card implements Api\GameObjectInterface
     {
         return empty($this->number) && 0 !== $this->number;
     }
-
 }
