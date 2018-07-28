@@ -9,11 +9,11 @@ namespace Freecell;
 class CardFactory implements Api\FactoryInterface
 {
     /**
-     * @param null $cardNum
+     * @param int|null $cardNum
      *
      * @return Card
      */
-    public function create($cardNum = null)
+    public function create(int $cardNum = null): Card
     {
         return new Card($cardNum);
     }

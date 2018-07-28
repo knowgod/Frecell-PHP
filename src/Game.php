@@ -28,6 +28,9 @@ class Game implements Api\GameObjectInterface
      */
     protected $rows = [];
 
+    /**
+     * @var Deck
+     */
     protected $deck;
 
     /**
@@ -35,6 +38,9 @@ class Game implements Api\GameObjectInterface
      */
     protected $cardFactory;
 
+    /**
+     * Game constructor.
+     */
     public function __construct()
     {
         $this->cardFactory = new CardFactory();
@@ -43,12 +49,18 @@ class Game implements Api\GameObjectInterface
         $this->clearDesk();
     }
 
-    public function run($gamenumber = 500800)
+    /**
+     * @param int $gameNumber
+     */
+    public function run(int $gameNumber = 500800)
     {
         $this->placeCards();
-        $this->shuffle($gamenumber);
+        $this->shuffle($gameNumber);
     }
 
+    /**
+     * Fill deck with the cards
+     */
     protected function placeCards()
     {
         for ($i = 0; $i < static::CARD_COUNT; $i++) {      // put unique $card in each $deck loc.
@@ -56,11 +68,19 @@ class Game implements Api\GameObjectInterface
         }
     }
 
-    protected function shuffle(int $gamenumber)
+    /**
+     * Shuffle cards on the deck
+     *
+     * @param int $gameNumber
+     */
+    protected function shuffle(int $gameNumber)
     {
         $cardsLeftToPlace = static::CARD_COUNT;
 
-        $randFunction = \Knowgod\PRNG\LinearCongruentialGenerator::msvcrt_rand($gamenumber);            // $gamenumber is seed for rand()
+        /**
+         * @var $gameNumber int Is seed for rand()
+         */
+        $randFunction = \Knowgod\PRNG\LinearCongruentialGenerator::msvcrt_rand($gameNumber);
 
         for ($i = 0; $i < static::CARD_COUNT; $i++) {
             $j = $randFunction() % $cardsLeftToPlace;
@@ -89,6 +109,9 @@ class Game implements Api\GameObjectInterface
         return $output;
     }
 
+    /**
+     * Prepare empty deck with all its positions
+     */
     protected function clearDesk()
     {
         for ($col = 0; $col < static::MAXCOL; $col++) {         // clear the $deck

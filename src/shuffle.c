@@ -34,7 +34,7 @@ _______________________________________________________________
 
 #define     MAXPOS         21
 #define     MAXCOL          9                       // includes top row as column 0
-            CARD            card[MAXCOL][MAXPOS];   // current layout of cards, CARDs are ints
+            CARD            card[MAXCOL][MAXPOS];   // current layout of cards, CARDs are integers
 
     int  i, j;                // generic counters
     int  col, pos;

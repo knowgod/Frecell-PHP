@@ -4,6 +4,7 @@ namespace Freecell;
 
 /**
  * Class Deck
+ * This is a deck containing cards
  *
  */
 class Deck implements Api\GameObjectInterface
@@ -18,7 +19,7 @@ class Deck implements Api\GameObjectInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $output = '';
         foreach ($this->cards as $card) {
@@ -28,7 +29,14 @@ class Deck implements Api\GameObjectInterface
         return $output;
     }
 
-    public function addCard(Card $card)
+    /**
+     * Add card to the card set
+     *
+     * @param Card $card
+     *
+     * @return Deck
+     */
+    public function addCard(Card $card): Deck
     {
         if ($card->getNumber() || 0 === $card->getNumber()) {
             $this->cards[] = $card;
@@ -37,7 +45,15 @@ class Deck implements Api\GameObjectInterface
         return $this;
     }
 
-    public function setCard(Card $card, $position)
+    /**
+     * Place card onto specific position
+     *
+     * @param Card $card
+     * @param      $position
+     *
+     * @return Deck
+     */
+    public function setCard(Card $card, $position): Deck
     {
         if ($card->getNumber()) {
             $this->cards[ $position ] = $card;
@@ -46,7 +62,14 @@ class Deck implements Api\GameObjectInterface
         return $this;
     }
 
-    public function getCard($position)
+    /**
+     * Get card from specified position
+     *
+     * @param int $position
+     *
+     * @return Card
+     */
+    public function getCard(int $position): Card
     {
         return $this->cards[ $position ];
     }

@@ -45,32 +45,53 @@ class Card implements Api\GameObjectInterface
         12 => ' K ',
     ];
 
+    /**
+     * @var int
+     */
     protected $suit;
 
+    /**
+     * @var int
+     */
     protected $number;
 
+    /**
+     * @var int
+     */
     protected $value;
 
+    /**
+     * @var int
+     */
     protected $colour;
 
-    public function __construct($cardNumber = null)
+    /**
+     * Card constructor.
+     *
+     * @param int|null $cardNumber
+     */
+    public function __construct(int $cardNumber = null)
     {
         if (isset($cardNumber)) {
             $this->setNumber($cardNumber);
         }
     }
 
-    public function setNumber($cardNumber)
+    /**
+     * @param int $cardNumber
+     */
+    public function setNumber(int $cardNumber)
     {
         $this->number = $cardNumber;
         $this->suit   = $suit = $cardNumber % 4;
         $this->value  = floor($cardNumber / 4);
-        $this->colour = (self::SUIT_DIAMOND == $suit || self::SUIT_HEART == $suit) ? self::COLOUR_RED : self::COLOUR_BLACK;
-
+        $this->colour = (self::SUIT_DIAMOND == $suit || self::SUIT_HEART == $suit)
+            ? self::COLOUR_RED
+            : self::COLOUR_BLACK;
     }
 
     /**
-     * @return int
+     * @return int|bool
      */
     public function getSuit()
     {
@@ -78,7 +99,7 @@ class Card implements Api\GameObjectInterface
     }
 
     /**
-     * @return mixed
+     * @return int|bool
      */
     public function getNumber()
     {
@@ -86,7 +107,7 @@ class Card implements Api\GameObjectInterface
     }
 
     /**
-     * @return float|int
+     * @return int|bool
      */
     public function getValue()
     {
@@ -94,7 +115,7 @@ class Card implements Api\GameObjectInterface
     }
 
     /**
-     * @return int
+     * @return int:bool
      */
     public function getColour()
     {
@@ -104,7 +125,7 @@ class Card implements Api\GameObjectInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return ($this->isInit())
             ? self::NOT_SET
