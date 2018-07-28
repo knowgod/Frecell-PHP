@@ -22,14 +22,14 @@ class Card implements Api\GameObjectInterface
     const SUIT_HEART   = 2;
     const SUIT_SPADES  = 3;
 
-    private static $suitFaces = [
+    private $suitFaces = [
         self::SUIT_CLUB    => "\u{2663}",
         self::SUIT_DIAMOND => "\u{2666}",
         self::SUIT_HEART   => "\u{2665}",
         self::SUIT_SPADES  => "\u{2660}",
     ];
 
-    private static $cardFaces = [
+    private $cardFaces = [
         0  => ' A ',
         1  => ' 2 ',
         2  => ' 3 ',
@@ -108,7 +108,7 @@ class Card implements Api\GameObjectInterface
     {
         return ($this->isInit())
             ? self::NOT_SET
-            : self::$suitFaces[ $this->suit ] . self::$cardFaces[ $this->value ];
+            : $this->suitFaces[ $this->suit ] . $this->cardFaces[ $this->value ];
     }
 
     /**

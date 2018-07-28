@@ -7,7 +7,7 @@
 namespace Freecell;
 
 /**
- * Class Desk
+ * Class Game
  *
  */
 class Game implements Api\GameObjectInterface
@@ -26,7 +26,7 @@ class Game implements Api\GameObjectInterface
     /**
      * @var array[]
      */
-    protected $positions = [];
+    protected $rows = [];
 
     protected $deck;
 
@@ -45,21 +45,18 @@ class Game implements Api\GameObjectInterface
 
     public function run($gamenumber = 500800)
     {
-        $this->shuffle();
-//        echo (string) $this->deck;
-
-        $this->placeCards($gamenumber);
-//        echo (string) $this->deck;
+        $this->placeCards();
+        $this->shuffle($gamenumber);
     }
 
-    protected function shuffle()
+    protected function placeCards()
     {
         for ($i = 0; $i < static::CARD_COUNT; $i++) {      // put unique $card in each $deck loc.
             $this->deck->addCard($this->cardFactory->create($i));
         }
     }
 
-    protected function placeCards($gamenumber)
+    protected function shuffle(int $gamenumber)
     {
         $cardsLeftToPlace = static::CARD_COUNT;
 
@@ -82,7 +79,7 @@ class Game implements Api\GameObjectInterface
         $output    = '';
         $separator = "    ";
 
-        foreach ($this->positions as $pos => $aColumns) {
+        foreach ($this->rows as $row => $aColumns) {
             foreach ($aColumns as $col => $card) {
                 $output .= $separator . $card;
             }
@@ -96,8 +93,8 @@ class Game implements Api\GameObjectInterface
     {
         for ($col = 0; $col < static::MAXCOL; $col++) {         // clear the $deck
             for ($pos = 0; $pos < static::MAXPOS; $pos++) {
-                $this->columns[ $col ][ $pos ]   = static::EMPTY;
-                $this->positions[ $pos ][ $col ] = &$this->columns[ $col ][ $pos ];
+                $this->columns[ $col ][ $pos ] = static::EMPTY;
+                $this->rows[ $pos ][ $col ]    = &$this->columns[ $col ][ $pos ];
             }
         }
     }
