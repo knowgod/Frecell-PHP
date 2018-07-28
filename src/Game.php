@@ -15,7 +15,7 @@ class Game implements Api\GameObjectInterface
     const MAXPOS     = 7;
     const MAXCOL     = 9;
 
-    const EMPTY      = '00';
+    const EMPTY      = '  ';
     const CARD_COUNT = 52;
 
     /**
