@@ -1,8 +1,10 @@
 {
   "name": "knowgod/freecell-php",
   "description": "Freecell solitaire game",
+  "type": "project",
   "license": "MIT",
   "version": "0.1.0",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Arkadij Kuzhel",
@@ -12,16 +14,17 @@
   "autoload": {
     "psr-4": {
       "Freecell\\": "src/",
-      "Freecell\\Lib\\": "lib/"
+      "Frecell\\Tests\\": "tests/"
     }
   },
-  "prefer-stable": true,
   "require": {
     "php": ">=7.0.0",
     "knowgod/prng": "~0.1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~6.2.0"
+    "phpunit/phpunit": "~6.2.0",
+    "phpmd/phpmd": "2.0.*",
+    "squizlabs/php_codesniffer": "^2.0"
   },
   "repositories": [
     {

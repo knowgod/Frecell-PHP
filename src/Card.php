@@ -12,6 +12,8 @@ namespace Freecell;
  */
 class Card implements Api\GameObjectInterface
 {
+    const NOT_SET = '';
+
     const COLOUR_RED   = 1;
     const COLOUR_BLACK = 0;
 
@@ -105,7 +107,7 @@ class Card implements Api\GameObjectInterface
     public function __toString()
     {
         return ($this->isInit())
-            ? ''
+            ? self::NOT_SET
             : self::$suitFaces[ $this->suit ] . self::$cardFaces[ $this->value ];
     }
 
