@@ -27,6 +27,19 @@ class GameTest extends \PHPUnit\Framework\TestCase
 SET
                 ,
             ],
+            [
+                501083,
+                <<<'SET'
+♣ A ♣ 4 ♦ K ♠ K ♠ J ♠ 7 ♣ 3 ♥ A 
+♦ A ♦ 6 ♣ 7 ♦ 2 ♣ 10♥ 3 ♥ K ♣ 6 
+♥ 10♣ 2 ♦ 8 ♣ 5 ♣ 8 ♠ 6 ♥ J ♠ 5 
+♦ J ♥ 6 ♣ K ♠ A ♦ 10♥ 9 ♠ Q ♠ 2 
+♦ 7 ♦ Q ♠ 9 ♠ 3 ♦ 4 ♠ 4 ♥ 5 ♦ 5 
+♥ Q ♥ 4 ♠ 8 ♣ 9 ♦ 3 ♥ 7 ♣ Q ♥ 8 
+♣ J ♥ 2 ♠ 10♦ 9 
+SET
+                ,
+            ],
         ];
     }
 
