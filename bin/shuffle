@@ -15,6 +15,8 @@ foreach ($autoloadLocations as $autoload) {
     }
 }
 
+$gameNumber = $argv[1] ?? 500905;
+
 $objGame = new \Freecell\Game();
-$objGame->run(500832);
+$objGame->run($gameNumber);
 echo $objGame;
