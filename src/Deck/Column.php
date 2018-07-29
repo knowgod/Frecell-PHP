@@ -4,6 +4,7 @@ namespace Freecell\Deck;
 
 use Freecell\Api\GameObjectInterface;
 use Freecell\Card;
+use Freecell\CardFactory;
 
 /**
  * Class Column
@@ -23,17 +24,26 @@ class Column implements GameObjectInterface
     protected $cards = [];
 
     /**
+     * @var CardFactory
+     */
+    protected $cardFactory;
+
+    /**
      * Column constructor.
      *
-     * @param Card[] $cards
+     * @param Card[]|int[] $cards
      */
     public function __construct(array $cards = [])
     {
         if (empty($cards)) {
             return;
         }
+        $this->cardFactory = new CardFactory();
 
         foreach ($cards as $card) {
+            if (is_int($card)) {
+                $card = $this->cardFactory->create($card);
+            }
             if ($card instanceof Card) {
                 $this->addCard($card, false);
             }
