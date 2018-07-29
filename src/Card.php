@@ -83,8 +83,8 @@ class Card implements Api\GameObjectInterface
     public function setNumber(int $cardNumber)
     {
         $this->number = $cardNumber;
-        $this->suit   = $suit = $cardNumber % 4;
-        $this->value  = floor($cardNumber / 4);
+        $this->suit   = (int) $suit = $cardNumber % 4;
+        $this->value  = (int) floor($cardNumber / 4);
         $this->colour = (self::SUIT_DIAMOND == $suit || self::SUIT_HEART == $suit)
             ? self::COLOUR_RED
             : self::COLOUR_BLACK;

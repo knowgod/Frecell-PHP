@@ -80,8 +80,10 @@ class Column implements GameObjectInterface
      */
     protected function canCover(Card $upperCard, Card $lowerCard): bool
     {
-        return ($valueDiff = $upperCard->getValue() - $lowerCard->getValue() === 1
-                             && $lowerCard->getColour() != $upperCard->getColour());
+        $valueDiff  = $upperCard->getValue() - $lowerCard->getValue();
+        $colourDiff = $lowerCard->getColour() - $upperCard->getColour();
+
+        return (1 === $valueDiff && 0 !== $colourDiff);
     }
 
     /**
