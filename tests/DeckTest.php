@@ -6,7 +6,7 @@
  * Time: 2:40
  */
 
-namespace Frecell\Tests;
+namespace Freecell\Tests;
 
 use Freecell\CardFactory;
 use Freecell\Deck;
@@ -54,7 +54,7 @@ class DeckTest extends TestCase
         foreach ($cardNumbers as $cardNumber) {
             $deck->addCard($this->cardFactory->create($cardNumber));
         }
-        $deckOutput = str_replace(["\n"], '', $deck);
+        $deckOutput = str_replace("\n", '', $deck);
         $this->assertEquals($output, $deckOutput);
     }
 }

@@ -6,7 +6,7 @@
  * Time: 3:04
  */
 
-namespace Frecell\Tests;
+namespace Freecell\Tests;
 
 use Freecell\Card;
 use Freecell\CardFactory;
@@ -25,7 +25,7 @@ class CardTest extends TestCase
     }
 
     /**
-     * For card attributes check: @see \Frecell\Tests\DeckTest::getToStringTestData
+     * For card attributes check: @see \Freecell\Tests\DeckTest::getToStringTestData
      *
      * @return array
      */
@@ -58,6 +58,6 @@ class CardTest extends TestCase
     public function testCardNotSetString()
     {
         $card = new Card();
-        $this->assertEquals(Card::NOT_SET, $card->__toString());
+        $this->assertEquals(Card::NOT_SET, (string) $card);
     }
 }

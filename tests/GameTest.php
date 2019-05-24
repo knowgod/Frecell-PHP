@@ -3,8 +3,9 @@
  * @author    Arkadij Kuzhel <arkuzhel@gmail.com>
  * @created   11.05.18
  */
-namespace Frecell\Tests;
+namespace Freecell\Tests;
 
+/** @noinspection PhpFullyQualifiedNameUsageInspection */
 /**
  * Class LcgTest
  *
@@ -51,10 +52,12 @@ SET
      */
     public function testRun(int $gameNumber, string $output)
     {
+        /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+        /** @noinspection PhpFullyQualifiedNameUsageInspection */
         $objGame = new \Freecell\Game();
         $objGame->run($gameNumber);
         $gameOutput = str_replace(['  ', "\n"], '', $objGame);
-        $output = str_replace("\n", '', $output);
+        $output     = str_replace("\n", '', $output);
         $this->assertEquals($output, $gameOutput);
     }
 }

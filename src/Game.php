@@ -6,6 +6,8 @@
 
 namespace Freecell;
 
+use Knowgod\PRNG\LinearCongruentialGenerator;
+
 /**
  * Class Game
  *
@@ -80,12 +82,12 @@ class Game implements Api\GameObjectInterface
         /**
          * @var $gameNumber int Is seed for rand()
          */
-        $randFunction = \Knowgod\PRNG\LinearCongruentialGenerator::msvcrt_rand($gameNumber);
+        $randFunction = LinearCongruentialGenerator::msvcrt_rand($gameNumber);
 
         for ($i = 0; $i < static::CARD_COUNT; $i++) {
             $j = $randFunction() % $cardsLeftToPlace;
 
-            $this->columns[ ($i % 8) + 1 ][ $i / 8 ] = $this->deck->getCard($j);
+            $this->columns[($i % 8) + 1][$i / 8] = $this->deck->getCard($j);
 
             $this->deck->setCard($this->deck->getCard(--$cardsLeftToPlace), $j);
         }
@@ -116,8 +118,8 @@ class Game implements Api\GameObjectInterface
     {
         for ($col = 0; $col < static::MAXCOL; $col++) {         // clear the $deck
             for ($pos = 0; $pos < static::MAXPOS; $pos++) {
-                $this->columns[ $col ][ $pos ] = static::EMPTY;
-                $this->rows[ $pos ][ $col ]    = &$this->columns[ $col ][ $pos ];
+                $this->columns[$col][$pos] = static::EMPTY;
+                $this->rows[$pos][$col]    = &$this->columns[$col][$pos];
             }
         }
     }
