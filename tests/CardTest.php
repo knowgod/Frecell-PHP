@@ -55,9 +55,13 @@ class CardTest extends TestCase
         $this->assertEquals($colour, $card->getColour());
     }
 
-    public function testCardNotSetString()
+    public function testEmptyCard()
     {
         $card = new Card();
         $this->assertEquals(Card::NOT_SET, (string) $card);
+        $this->assertFalse($card->isInit());
+
+        $card = new Card(0);
+        $this->assertTrue($card->isInit());
     }
 }
