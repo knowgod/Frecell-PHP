@@ -12,7 +12,10 @@ namespace Freecell\Tests;
  */
 class GameTest extends \PHPUnit\Framework\TestCase
 {
-    public function getGameNumberTestData()
+    /**
+     * @return array[]
+     */
+    public function getGameNumberTestData(): array
     {
         return [
             [

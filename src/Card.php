@@ -15,24 +15,24 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
     const NOT_SET = '';
 
     /**
-     * @var int
+     * @var int|bool
      */
-    protected $suit;
+    protected $suit = false;
 
     /**
-     * @var int
+     * @var int|bool
      */
-    protected $number;
+    protected $number = false;
 
     /**
-     * @var int
+     * @var int|bool
      */
-    protected $value;
+    protected $value = false;
 
     /**
-     * @var int
+     * @var int|bool
      */
-    protected $colour;
+    protected $colour = false;
 
     /**
      * Card constructor.
@@ -64,7 +64,7 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
      */
     public function getSuit()
     {
-        return $this->suit ?? false;
+        return $this->suit;
     }
 
     /**
@@ -72,7 +72,7 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
      */
     public function getNumber()
     {
-        return $this->number ?? false;
+        return $this->number;
     }
 
     /**
@@ -80,15 +80,15 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
      */
     public function getValue()
     {
-        return $this->value ?? false;
+        return $this->value;
     }
 
     /**
-     * @return int:bool
+     * @return int|bool
      */
     public function getColour()
     {
-        return $this->colour ?? false;
+        return $this->colour;
     }
 
     /**
@@ -96,7 +96,7 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
      */
     public function __toString(): string
     {
-        return ($this->isInit())
+        return $this->isInit()
             ? self::NOT_SET
             : self::FACE_SUIT[$this->suit] . self::FACE_CARD[$this->value];
     }

@@ -23,7 +23,7 @@ class Deck implements Api\GameObjectInterface
     {
         $output = '';
         foreach ($this->cards as $card) {
-            $output .= (string) $card . self::DELIMITER;
+            $output .= $card . self::DELIMITER;
         }
 
         return $output;
@@ -67,7 +67,7 @@ class Deck implements Api\GameObjectInterface
      *
      * @param int $position
      *
-     * @return Card
+     * @return \Freecell\Card
      */
     public function getCard(int $position): Card
     {

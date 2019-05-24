@@ -99,7 +99,7 @@ class Game implements Api\GameObjectInterface
     public function __toString()
     {
         $output    = '';
-        $separator = "    ";
+        $separator = '    ';
 
         foreach ($this->rows as $row => $aColumns) {
             foreach ($aColumns as $col => $card) {

@@ -19,12 +19,18 @@ class DeckTest extends TestCase
      */
     private $cardFactory;
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         $this->cardFactory = new CardFactory();
     }
 
-    public function getToStringTestData()
+    /**
+     * @return array[]
+     */
+    public function getToStringTestData(): array
     {
         return [
             [

@@ -29,7 +29,7 @@ class CardTest extends TestCase
      *
      * @return array
      */
-    public function getRepresentationTestData()
+    public function getRepresentationTestData(): array
     {
         return [
             [0, Card::SUIT_CLUB, 0, Card::COLOUR_BLACK,],
