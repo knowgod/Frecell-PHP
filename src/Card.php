@@ -97,8 +97,8 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
     public function __toString(): string
     {
         return $this->isInit()
-            ? self::NOT_SET
-            : self::FACE_SUIT[$this->suit] . self::FACE_CARD[$this->value];
+            ? self::FACE_SUIT[$this->suit] . self::FACE_CARD[$this->value]
+            : self::NOT_SET;
     }
 
     /**
@@ -106,7 +106,7 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
      */
     public function isInit(): bool
     {
-        return empty($this->number) && 0 !== $this->number;
+        return false !== $this->number;
     }
 
 }
