@@ -57,7 +57,7 @@ class Column implements GameObjectInterface
      */
     public function isSorted(): bool
     {
-        $amountSorted = $this->getAmountSorted();
+        $amountSorted = $this->getAmountMovable();
 
         return $amountSorted === count($this->cards);
     }
@@ -65,7 +65,7 @@ class Column implements GameObjectInterface
     /**
      * @return int
      */
-    protected function getAmountSorted(): int
+    protected function getAmountMovable(): int
     {
         $amountSorted = 0;
         $lowerCard    = null;
@@ -137,11 +137,12 @@ class Column implements GameObjectInterface
      */
     public function dismissCards($amount = 1)
     {
-        if ($this->getAmountSorted() < $amount) {
+        if ($this->getAmountMovable() < $amount) {
             return false;
         }
 
         //TODO Create and return sub-column sliced off this one
+        /** @noinspection OneTimeUseVariablesInspection */
         $subColumn = new Column();
 
         return $subColumn;
@@ -160,8 +161,6 @@ class Column implements GameObjectInterface
      */
     public function __toString(): string
     {
-        $output = implode(self::DELIMITER, $this->cards);
-
-        return $output;
+        return implode(self::DELIMITER, $this->cards);
     }
 }
