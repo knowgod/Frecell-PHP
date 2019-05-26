@@ -10,13 +10,15 @@ $autoloadLocations = array(
 
 foreach ($autoloadLocations as $autoload) {
     if (is_file($autoload)) {
-        require_once($autoload);
+        /** @noinspection PhpIncludeInspection */
+        require_once $autoload;
         break;
     }
 }
 
 $gameNumber = $argv[1] ?? 500905;
 
+/** @noinspection PhpFullyQualifiedNameUsageInspection */
 $objGame = new \Freecell\Game();
 $objGame->run($gameNumber);
 echo $objGame;

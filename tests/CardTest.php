@@ -6,7 +6,7 @@
  * Time: 3:04
  */
 
-namespace Frecell\Tests;
+namespace Freecell\Tests;
 
 use Freecell\Card;
 use Freecell\CardFactory;
@@ -25,11 +25,11 @@ class CardTest extends TestCase
     }
 
     /**
-     * For card attributes check: @see \Frecell\Tests\DeckTest::getToStringTestData
+     * For card attributes check: @see \Freecell\Tests\DeckTest::getToStringTestData
      *
      * @return array
      */
-    public function getRepresentationTestData()
+    public function getRepresentationTestData(): array
     {
         return [
             [0, Card::SUIT_CLUB, 0, Card::COLOUR_BLACK,],
@@ -55,9 +55,13 @@ class CardTest extends TestCase
         $this->assertEquals($colour, $card->getColour());
     }
 
-    public function testCardNotSetString()
+    public function testEmptyCard()
     {
         $card = new Card();
-        $this->assertEquals(Card::NOT_SET, $card->__toString());
+        $this->assertEquals(Card::NOT_SET, (string) $card);
+        $this->assertFalse($card->isInit());
+
+        $card = new Card(0);
+        $this->assertTrue($card->isInit());
     }
 }

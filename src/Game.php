@@ -8,6 +8,7 @@ namespace Freecell;
 
 use Freecell\Deck\Column;
 use Freecell\Deck\ColumnFactory;
+use Knowgod\PRNG\LinearCongruentialGenerator;
 
 /**
  * Class Game
@@ -93,7 +94,7 @@ class Game implements Api\GameObjectInterface
         /**
          * @var $gameNumber int Is seed for rand()
          */
-        $randFunction = \Knowgod\PRNG\LinearCongruentialGenerator::msvcrt_rand($gameNumber);
+        $randFunction = LinearCongruentialGenerator::msvcrt_rand($gameNumber);
 
         for ($i = 0; $i < static::CARD_COUNT; $i++) {
             $j = $randFunction() % $cardsLeftToPlace;
@@ -110,7 +111,7 @@ class Game implements Api\GameObjectInterface
     public function __toString()
     {
         $output    = '';
-        $separator = "    ";
+        $separator = '    ';
 
         foreach ($this->rows as $row => $aColumns) {
             foreach ($aColumns as $col => $card) {

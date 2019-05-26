@@ -13,8 +13,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "Freecell\\": "src/",
-      "Frecell\\Tests\\": "tests/"
+      "Freecell\\Tests\\": "tests/",
+      "Freecell\\": "src/"
     }
   },
   "require": {
