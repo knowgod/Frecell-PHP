@@ -30,15 +30,21 @@ class Column implements GameObjectInterface
     protected $cardFactory;
 
     /**
+     * @var \Freecell\Deck\ColumnFactory
+     */
+    private $columnFactory;
+
+    /**
      * Column constructor.
      *
-     * @param Card[]|int[] $cards
+     * @param \Freecell\Deck\ColumnFactory $columnFactory
+     * @param Card[]|int[]                 $cards
      */
-    public function __construct(array $cards = [])
-    {
-        if (empty($cards)) {
-            return;
-        }
+    public function __construct(
+        ColumnFactory $columnFactory,
+        array $cards = []
+    ) {
+        $this->columnFactory = $columnFactory;
         $this->cardFactory = new CardFactory();
 
         foreach ($cards as $card) {
@@ -71,8 +77,8 @@ class Column implements GameObjectInterface
         $amountSorted = 0;
         $bottomCard   = null;
         /** @var Card $bottomCard */
-        foreach ($this->cards as $card) {
-            if (null === $bottomCard || $this->canCover($bottomCard, $card)) {
+        foreach ($this->iterateTopToBottom() as $card) {
+            if (null === $bottomCard || $this->canCover($card, $bottomCard)) {
                 $bottomCard = $card;
                 $amountSorted++;
             } else {
@@ -108,7 +114,7 @@ class Column implements GameObjectInterface
     public function addCard(Card $card, $withCheck = true): Column
     {
         if (!$withCheck || $this->canPlace($card)) {
-            array_unshift($this->cards, $card);
+            $this->cards[] = $card;
         }
 
         return $this;
@@ -121,12 +127,22 @@ class Column implements GameObjectInterface
      */
     public function canPlace(Card $card): bool
     {
-        $bottomCard = $this->cards[0] ?? null;
-        if (!($bottomCard instanceof Card)) {
+        $topCard = end($this->cards);
+        if (!($topCard instanceof Card)) {
             return true;
         }
 
-        return $this->canCover($bottomCard, $card);
+        return $this->canCover($topCard, $card);
+    }
+
+    /**
+     * @return \Generator
+     */
+    private function iterateTopToBottom()
+    {
+        for ($i = count($this->cards) - 1; $i >= 0; --$i) {
+            yield $this->cards[$i];
+        }
     }
 
     /**
@@ -134,17 +150,29 @@ class Column implements GameObjectInterface
      *
      * @param int $amount
      *
-     * @return bool|Column
+     * @return bool|Column Sub-column taken off or `false`
      */
     public function dismissCards($amount = 1)
     {
         if ($this->getAmountMovable() < $amount) {
             return false;
         }
+        /**
+         * Card[]
+         */
+        $cards = [];
+        foreach ($this->iterateTopToBottom() as $index => $cardFromTop) {
+            if (count($cards) === $amount) {
+                break;
+            }
+            $cards[$index] = $cardFromTop;
+        }
 
-        //TODO Create and return sub-column sliced off this one
-        /** @noinspection OneTimeUseVariablesInspection */
-        $subColumn = new Column();
+        $subColumn = $this->columnFactory->create();
+        foreach (array_reverse($cards) as $index => $cardFromBottom) {
+            $subColumn->addCard($cardFromBottom);
+            unset($this->cards[$index]);
+        }
 
         return $subColumn;
     }

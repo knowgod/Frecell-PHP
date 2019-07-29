@@ -2,16 +2,17 @@
 
 namespace Freecell\Deck;
 
+use Freecell\Api\FactoryInterface;
 use Freecell\Api\GameObjectInterface;
 
-class ColumnFactory implements \Freecell\Api\FactoryInterface
+class ColumnFactory implements FactoryInterface
 {
     /**
      * @return Column
      */
     public function create(): GameObjectInterface
     {
-        return new Column();
+        return new Column($this);
     }
 
     /**
@@ -21,6 +22,6 @@ class ColumnFactory implements \Freecell\Api\FactoryInterface
      */
     public function createFilled(array $cards): Column
     {
-        return new Column($cards);
+        return new Column($this, $cards);
     }
 }

@@ -43,6 +43,11 @@ class ColumnTest extends TestCase
 
     /**
      * @dataProvider getAddCardTestData
+     *
+     * @param array $cards
+     * @param       $withTest
+     * @param       $expectedCount
+     *
      * @throws \ReflectionException
      */
     public function testAddCard(array $cards, $withTest, $expectedCount)
@@ -69,22 +74,21 @@ class ColumnTest extends TestCase
     public function getCanPlaceTestData(): array
     {
         return [
-            [15, 11, false],
-            [15, 10, true],
+            [[7, 15], 11, false],
+            [[7, 15], 10, true],
         ];
     }
 
     /**
      * @dataProvider getCanPlaceTestData
      *
-     * @param int  $initialCard
-     * @param int  $cardToPlace
-     * @param bool $expectedResult
+     * @param int[] $columnCards
+     * @param int   $cardToPlace
+     * @param bool  $expectedResult
      */
-    public function testCanPlace(int $initialCard, int $cardToPlace, bool $expectedResult)
+    public function testCanPlace(array $columnCards, int $cardToPlace, bool $expectedResult)
     {
-        $initialCard = $this->cardFactory->create($initialCard);
-        $column      = $this->columnFactory->createFilled([$initialCard]);
+        $column = $this->columnFactory->createFilled($columnCards);
 
         $result = $column->canPlace($this->cardFactory->create($cardToPlace));
         $this->assertEquals($expectedResult, $result);
@@ -95,23 +99,30 @@ class ColumnTest extends TestCase
         return [
             [[11], 1, [11]],
             [[15, 10, 11], 1, [11]],
+            [[15, 1, 16, 22], 2, false],
+            [[15, 1, 8, 6], 2, [8, 6]],
+            [[19, 14, 8, 6], 4, [19, 14, 8, 6]],
         ];
     }
 
     /**
      * @dataProvider getDismissCardsTestData
      *
-     * @param array $cards
-     * @param int   $amountToSlice
-     * @param array $resultCards
+     * @param array                  $cards
+     * @param int                    $amountToSlice
+     * @param \Freecell\Card[]|false $resultCards
      */
-    public function testDismissCards(array $cards, int $amountToSlice, array $resultCards)
+    public function testDismissCards(array $cards, int $amountToSlice, $resultCards)
     {
         $fullColumn     = $this->columnFactory->createFilled($cards);
-        $expectedSliced = $this->columnFactory->createFilled($resultCards);
+        if (is_array($resultCards)) {
+            $expectedSliced = $this->columnFactory->createFilled($resultCards);
+        } else {
+            $expectedSliced = $resultCards;
+        }
 
         $sliced = $fullColumn->dismissCards($amountToSlice);
-        $this->assertEquals($expectedSliced, $sliced);
+        $this->assertEquals((string) $expectedSliced, (string) $sliced);
     }
 
     public function getIsSortedTestData(): array
