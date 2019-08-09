@@ -35,6 +35,11 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
     protected $colour = false;
 
     /**
+     * @var string
+     */
+    protected $representation;
+
+    /**
      * Card constructor.
      *
      * @param int|null $cardNumber
@@ -52,11 +57,15 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
     public function setNumber(int $cardNumber)
     {
         $this->number = $cardNumber;
-        $this->suit   = (int) $suit = $cardNumber % 4;
+        $this->suit   = $suit = $cardNumber % 4;
         $this->value  = (int) floor($cardNumber / 4);
-        $this->colour = (self::SUIT_DIAMOND == $suit || self::SUIT_HEART == $suit)
+        $this->colour = (self::SUIT_DIAMOND === $suit || self::SUIT_HEART === $suit)
             ? self::COLOUR_RED
             : self::COLOUR_BLACK;
+
+        if (extension_loaded('xdebug')) {
+            $this->representation = $this->__toString();
+        }
     }
 
     /**
@@ -96,9 +105,13 @@ class Card implements Api\GameObjectInterface, Api\Object\CardInterface
      */
     public function __toString(): string
     {
-        return $this->isInit()
+        if (empty($this->representation)) {
+            $this->representation = $this->isInit()
             ? self::FACE_SUIT[$this->suit] . self::FACE_CARD[$this->value]
             : self::NOT_SET;
+        }
+
+        return $this->representation;
     }
 
     /**
