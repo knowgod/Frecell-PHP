@@ -17,7 +17,8 @@ class Column implements GameObjectInterface
     const DELIMITER = ' / ';
 
     /**
-     * Keep cards from bottom to top
+     * Indexed array of cards from bottom to top
+     * The top card is one that could be taken off
      *
      * @var Card[]
      */
@@ -68,11 +69,11 @@ class Column implements GameObjectInterface
     protected function getAmountMovable(): int
     {
         $amountSorted = 0;
-        $lowerCard    = null;
-        /** @var Card $lowerCard */
+        $bottomCard   = null;
+        /** @var Card $bottomCard */
         foreach ($this->cards as $card) {
-            if (null === $lowerCard || $this->canCover($card, $lowerCard)) {
-                $lowerCard = $card;
+            if (null === $bottomCard || $this->canCover($bottomCard, $card)) {
+                $bottomCard = $card;
                 $amountSorted++;
             } else {
                 break;
@@ -83,15 +84,15 @@ class Column implements GameObjectInterface
     }
 
     /**
-     * @param Card $upperCard
-     * @param Card $lowerCard
+     * @param Card $bottomCard
+     * @param Card $topCard
      *
      * @return bool
      */
-    protected function canCover(Card $upperCard, Card $lowerCard): bool
+    protected function canCover(Card $bottomCard, Card $topCard): bool
     {
-        $valueDiff  = $upperCard->getValue() - $lowerCard->getValue();
-        $colourDiff = $lowerCard->getColour() - $upperCard->getColour();
+        $valueDiff  = $bottomCard->getValue() - $topCard->getValue();
+        $colourDiff = $topCard->getColour() - $bottomCard->getColour();
 
         return (1 === $valueDiff && 0 !== $colourDiff);
     }
@@ -120,7 +121,7 @@ class Column implements GameObjectInterface
      */
     public function canPlace(Card $card): bool
     {
-        $bottomCard = $this->cards[0] ?? null;//TODO Do not rely on indexes
+        $bottomCard = $this->cards[0] ?? null;
         if (!($bottomCard instanceof Card)) {
             return true;
         }
