@@ -8,5 +8,5 @@ interface FactoryInterface
     /**
      * @return GameObjectInterface
      */
-    public function create();
+    public function create(): GameObjectInterface;
 }
