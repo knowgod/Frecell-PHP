@@ -9,7 +9,6 @@
 namespace Frecell\Tests;
 
 use Freecell\CardFactory;
-use Freecell\Deck\Column;
 use Freecell\Deck\ColumnFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -44,23 +43,17 @@ class ColumnTest extends TestCase
     /**
      * @dataProvider getAddCardTestData
      *
-     * @param array $cards
-     * @param       $withTest
-     * @param       $expectedCount
-     *
-     * @throws \ReflectionException
+     * @param int[] $cards
+     * @param bool  $withTest
+     * @param int   $expectedCount
      */
     public function testAddCard(array $cards, $withTest, $expectedCount)
     {
-        $column        = $this->columnFactory->create();
-        $reflection    = new \ReflectionClass(Column::class);
-        $cardsProperty = $reflection->getProperty('cards');
-        $cardsProperty->setAccessible(true);
-
+        $column = $this->columnFactory->create();
         foreach ($cards as $cardNum) {
             $column->addCard($this->cardFactory->create($cardNum), $withTest);
         }
-        $this->assertCount($expectedCount, $cardsProperty->getValue($column));
+        $this->assertEquals($expectedCount, $column->count());
     }
 
     public function testIsEmpty()
