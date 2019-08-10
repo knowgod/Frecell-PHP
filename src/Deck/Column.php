@@ -58,6 +58,14 @@ class Column implements GameObjectInterface
     }
 
     /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->cards);
+    }
+
+    /**
      * If columns is sorted and ready for auto-solve
      *
      * @return bool
@@ -66,7 +74,7 @@ class Column implements GameObjectInterface
     {
         $amountSorted = $this->getAmountMovable();
 
-        return $amountSorted === count($this->cards);
+        return $this->count() === $amountSorted;
     }
 
     /**
@@ -140,7 +148,7 @@ class Column implements GameObjectInterface
      */
     private function iterateTopToBottom()
     {
-        for ($i = count($this->cards) - 1; $i >= 0; --$i) {
+        for ($i = $this->count() - 1; $i >= 0; --$i) {
             yield $this->cards[$i];
         }
     }
