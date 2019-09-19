@@ -12,7 +12,6 @@ namespace Freecell\Deck\Column;
 use Freecell\Card;
 use Freecell\CardFactory;
 use Freecell\Deck\Column;
-use Freecell\Deck\ColumnFactory;
 
 /**
  * Class Stack
@@ -23,7 +22,7 @@ class Stack extends Column
 {
     /** @noinspection MagicMethodsValidityInspection */
     /** @noinspection PhpMissingParentConstructorInspection */
-    public function __construct(ColumnFactory $columnFactory, array $cards = [])
+    public function __construct(array $cards = [])
     {
         $this->cardFactory = new CardFactory();
 
@@ -33,6 +32,7 @@ class Stack extends Column
             }
             if ($card instanceof Card) {
                 if (!$this->canPlace($card)) {
+                    /** @noinspection PhpFullyQualifiedNameUsageInspection */
                     throw new \InvalidArgumentException('Error creating stack: The set of cards is not stackable.');
                 }
                 $this->addCard($card);
