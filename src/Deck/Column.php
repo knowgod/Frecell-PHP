@@ -2,7 +2,8 @@
 
 namespace Freecell\Deck;
 
-use Freecell\Api\GameObjectInterface;
+use Freecell\Api\ColumnFactoryInterface;
+use Freecell\Api\Object\ColumnInterface;
 use Freecell\Card;
 use Freecell\CardFactory;
 
@@ -12,7 +13,7 @@ use Freecell\CardFactory;
  *
  * @package Freecell\Deck
  */
-class Column implements GameObjectInterface
+class Column implements ColumnInterface
 {
     const DELIMITER = ' / ';
 
@@ -37,11 +38,11 @@ class Column implements GameObjectInterface
     /**
      * Column constructor.
      *
-     * @param \Freecell\Deck\ColumnFactory $columnFactory
-     * @param Card[]|int[]                 $cards
+     * @param \Freecell\Api\ColumnFactoryInterface $columnFactory
+     * @param Card[]|int[]                         $cards
      */
     public function __construct(
-        ColumnFactory $columnFactory,
+        ColumnFactoryInterface $columnFactory,
         array $cards = []
     ) {
         $this->columnFactory = $columnFactory;
@@ -60,7 +61,7 @@ class Column implements GameObjectInterface
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->cards);
     }
