@@ -20,8 +20,10 @@ use Freecell\Deck\Column;
  */
 class Stack extends Column
 {
-    /** @noinspection MagicMethodsValidityInspection */
-    /** @noinspection PhpMissingParentConstructorInspection */
+    /**
+     * @param int[]|\Freecell\Card[] $cards
+     *
+     * @noinspection PhpMissingParentConstructorInspection*/
     public function __construct(array $cards = [])
     {
         $this->cardFactory = new CardFactory();

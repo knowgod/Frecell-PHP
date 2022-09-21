@@ -45,11 +45,11 @@ class StackTest extends TestCase
      */
     public function testConstruct(array $cards, bool $isStackable)
     {
-        $column = $this->stackFactory->createFilled($cards);
-        if ($isStackable) {
+        try {
+            $column = $this->stackFactory->createFilled($cards);
             $this->assertEquals(count($cards), $column->count());
-        } else {
-            $this->expectException(\InvalidArgumentException::class);
+        } catch (\InvalidArgumentException $e) {
+            $this->assertFalse($isStackable);
         }
     }
 
