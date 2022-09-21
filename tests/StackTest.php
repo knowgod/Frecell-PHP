@@ -24,7 +24,7 @@ class StackTest extends TestCase
      */
     private $stackFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->stackFactory = new StackFactory();
     }

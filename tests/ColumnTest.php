@@ -24,7 +24,7 @@ class ColumnTest extends TestCase
      */
     private $columnFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cardFactory   = new CardFactory();
         $this->columnFactory = new ColumnFactory();
