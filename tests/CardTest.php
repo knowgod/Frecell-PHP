@@ -19,7 +19,7 @@ class CardTest extends TestCase
      */
     private $cardFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cardFactory = new CardFactory();
     }

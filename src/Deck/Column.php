@@ -2,7 +2,8 @@
 
 namespace Freecell\Deck;
 
-use Freecell\Api\GameObjectInterface;
+use Freecell\Api\ColumnFactoryInterface;
+use Freecell\Api\Object\ColumnInterface;
 use Freecell\Card;
 use Freecell\CardFactory;
 
@@ -12,7 +13,7 @@ use Freecell\CardFactory;
  *
  * @package Freecell\Deck
  */
-class Column implements GameObjectInterface
+class Column implements ColumnInterface
 {
     const DELIMITER = ' / ';
 
@@ -37,11 +38,11 @@ class Column implements GameObjectInterface
     /**
      * Column constructor.
      *
-     * @param \Freecell\Deck\ColumnFactory $columnFactory
-     * @param Card[]|int[]                 $cards
+     * @param \Freecell\Api\ColumnFactoryInterface $columnFactory
+     * @param Card[]|int[]                         $cards
      */
     public function __construct(
-        ColumnFactory $columnFactory,
+        ColumnFactoryInterface $columnFactory,
         array $cards = []
     ) {
         $this->columnFactory = $columnFactory;
@@ -58,6 +59,14 @@ class Column implements GameObjectInterface
     }
 
     /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->cards);
+    }
+
+    /**
      * If columns is sorted and ready for auto-solve
      *
      * @return bool
@@ -66,7 +75,7 @@ class Column implements GameObjectInterface
     {
         $amountSorted = $this->getAmountMovable();
 
-        return $amountSorted === count($this->cards);
+        return $this->count() === $amountSorted;
     }
 
     /**
@@ -140,7 +149,7 @@ class Column implements GameObjectInterface
      */
     private function iterateTopToBottom()
     {
-        for ($i = count($this->cards) - 1; $i >= 0; --$i) {
+        for ($i = $this->count() - 1; $i >= 0; --$i) {
             yield $this->cards[$i];
         }
     }
