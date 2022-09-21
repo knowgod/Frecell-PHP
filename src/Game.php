@@ -99,7 +99,7 @@ class Game implements Api\GameObjectInterface
         for ($i = 0; $i < static::CARD_COUNT; $i++) {
             $j = $randFunction() % $cardsLeftToPlace;
 
-            $this->columns[ ($i % 8) + 1 ][ $i / 8 ] = $this->deck->getCard($j);
+            $this->columns[ ($i % 8) + 1 ][ floor($i / 8) ] = $this->deck->getCard($j);
 
             $this->deck->setCard($this->deck->getCard(--$cardsLeftToPlace), $j);
         }
