@@ -17,15 +17,15 @@ class CardTest extends TestCase
     /**
      * @var CardFactory
      */
-    private $cardFactory;
+    private CardFactory $cardFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cardFactory = new CardFactory();
     }
 
     /**
-     * For card attributes check: @see \Freecell\Tests\DeckTest::getToStringTestData
+     * For card attributes check: {@see \Freecell\Tests\DeckTest::getToStringTestData}
      *
      * @return array
      */

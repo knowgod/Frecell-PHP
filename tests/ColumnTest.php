@@ -25,7 +25,7 @@ class ColumnTest extends TestCase
      */
     private $columnFactory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cardFactory   = new CardFactory();
         $this->columnFactory = new ColumnFactory();
@@ -114,7 +114,7 @@ class ColumnTest extends TestCase
      */
     public function testDismissCards(array $cards, int $amountToSlice, $resultCards)
     {
-        $fullColumn     = $this->columnFactory->createFilled($cards);
+        $fullColumn = $this->columnFactory->createFilled($cards);
         if (is_array($resultCards)) {
             $expectedSliced = $this->columnFactory->createFilled($resultCards);
         } else {

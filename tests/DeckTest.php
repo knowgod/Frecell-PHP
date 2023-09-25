@@ -22,7 +22,7 @@ class DeckTest extends TestCase
     /**
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cardFactory = new CardFactory();
     }
@@ -34,7 +34,7 @@ class DeckTest extends TestCase
     {
         return [
             [
-                [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15],
+                [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
                 '♣ A ♦ A ♥ A ♠ A ♣ 2 ♦ 2 ♥ 2 ♠ 2 ♣ 3 ♦ 3 ♥ 3 ♠ 3 ♣ 4 ♦ 4 ♥ 4 ♠ 4 ',
             ],
             [
